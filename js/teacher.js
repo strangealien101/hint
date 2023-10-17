@@ -34,7 +34,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
   hintСard: 0, /* Сохраняем подсказку*/
   helpData: document.querySelectorAll('[data-id]'),
   createHint: function(a) {/* Формируем подсказку*/
-    hint.activeState = true;
+
     let template = document.querySelector('#templateHelpWindow') /* находим шаблон подсказки */ 
     let helpWindow = template.content.cloneNode(true); /* копируем шаблон */ 
     
@@ -50,7 +50,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
 
 
     if(hint.countHelp > 0) {    /* Если длина счётчика подсказок больше 0, то появляется кнопка "Назад" */           
-      previousBtn.style.display = 'block';
+      previousBtnTH.style.display = 'block';
     }
   
     if(hint.countHelp == (hint.modalTextWindow.length-1) || hint.countHelp == (hint.helpData.length - 1)) { /* Если длина массива с текстом подсказки равна длинне счётчика или длина счётчика равна длине найденных ID, то убираем кнопку "Далее" */ 
@@ -68,7 +68,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
       /* hint.showPage();*/
       hint.visibilityPage();
       hint.returnElementState(a);
-      hint.activeState = false;
+  
       hint.countHelp = 0;
     } 
 
@@ -83,7 +83,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
        startTeacher(hint.countHelp);
      }
      /* Обработка события кнопки "Назад" */
-    previousBtn.addEventListener('click', previousTeacher);
+    previousBtnTH.addEventListener('click', previousTeacher);
     function previousTeacher(){
       hint.countHelp = hint.countHelp - 1; /* уменьшаем счетчик на 1 */
       hint.returnElementState(a);
