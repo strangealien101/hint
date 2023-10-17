@@ -4,7 +4,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
 /*------------------- Высплывающая подсказка у элемента -----------------------*/
 
  let user = {
-  trainingCompleted: false,
+  trainingCompleted: true,   /* Проходил ли пользователь обучение? */
  }
 
 
@@ -64,8 +64,6 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     function exitTeacher(){
       /* Закрытие модального окна  */
       user.trainingCompleted = true;
-      console.log('клик')
-      /* hint.showPage();*/
       hint.visibilityPage();
       hint.returnElementState(a);
   
@@ -217,7 +215,6 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
  function startTeacher(a){
   if (user.trainingCompleted == false) {   /* если обучение не пройдено, то запускаем все функции */
     /*hint.hidePage();  скрываем фон */
-    console.log('1 ' + a);
     hint.visibilityPage()
     hint.createHint(a); /* создаем подсказку */
     hint.preparingPlacesForHints(a); /* готовим место для подсказки */
@@ -226,15 +223,54 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
   
 }
 
+
+/*
+? Плашка сбоку 
+*/
+/* Появление окна справки по работе с системой */
+
+document.getElementById('bookMark').addEventListener('click', closeWindowHelp);
+
+function closeWindowHelp() {  /* При нажатии на закладку, у нас добавляется класс, при повторном нажатии класс удаляется */
+  document.getElementById('program').classList.toggle('block-programs__play');
+  document.getElementById('bookMark').classList.toggle('bookmarkExit'); 
+  document.getElementById('bckgHelp').classList.toggle('modalBGTH');
+}
+/* Окно для заполнения формы для связи */
+
+let stringAid = document.getElementById('aid'); /* находим по id элемент "Написать в поддержку" */
+let formAid = document.getElementById('connection')  /* находим по id контейнер с формой для заполнения */
+
+function openAid() {                    /* при клике на элемент вызываем функцию, где у нас появляется форма */
+  formAid.style.display = 'block'
+}
+
+stringAid.addEventListener('click', openAid); 
+
+let exitForm = document.getElementById('btnExit'); /* находим по id кнопку закрытия окна формы */
+
+function exitAid() {                    /* при клике на элемент вызываем функцию, где закрывается форма */
+  formAid.style.display = "none";
+}
+
+exitForm.addEventListener('click', exitAid);
+
+document.getElementById('startHlp').onclick = function() {
+ 
+  closeWindowHelp();
+  user.trainingCompleted = false;
+  startTeacher(hint.countHelp); 
+}
+
+
 /* 
 ! =================== НАЧАЛО ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
-
 startTeacher(hint.countHelp); 
-
-}
-)
-
 /* 
 ! =================== КОНЕЦ ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
+}
+)
+
+
