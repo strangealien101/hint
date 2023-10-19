@@ -39,6 +39,26 @@ body {
     font-style: normal;
 }
 
+:root {
+    --blackWilliam: rgb(0, 0, 0);
+    --grayDolores: rgba(40, 40, 40, 1);
+    --grayTeodor: rgba(65, 65, 65, 1);
+    --whiteMaeve: rgba(255, 255, 255, 1);
+    --grayBernard:  rgba(123, 123, 123, 1);
+    --whiteCharlotte: rgba(224, 224, 224, 1);
+    --whiteRobert: rgba(181, 181, 181, 1);
+    --grayHector: rgba(53, 53, 53, 1);
+    --grayArnold: rgba(88, 88, 88, 1);
+    --whiteLogan: rgba(252, 252, 252, 1);
+    --blackLawrence: rgba(40, 40, 40, 1);
+    --grayClementine: rgba(173, 173, 173, 1);
+    --redAshley: rgba(255, 0, 0, 1);
+    --blackElsie: #33333396;
+    --whiteMusashi:  rgba(160, 160, 160, 1);
+    --whiteEmily: #E2E2E2;
+    --whitePeter: #FCFCFC;
+}
+
 
 /* Справка */
 
@@ -62,7 +82,7 @@ body {
     flex-direction: column;
     width: 482px;
     height: 100vh;
-    background-color: rgba(252, 252, 252, 1);
+    background-color: var(--whiteLogan);
 }
 
 .reference-title {
@@ -71,8 +91,8 @@ body {
     line-height: 24px;
     font-weight: 500;
     font-family: "Roboto";
-    color: rgba(40, 40, 40, 1);
-    border-bottom: 1px solid rgba(173, 173, 173, 1);
+    color: var(--blackLawrence);
+    border-bottom: 1px solid var(--grayClementine);
 }
 
 .reference-infoBlock {
@@ -89,7 +109,7 @@ body {
     font-size: 24px;
     line-height: 28px;
     font-weight: 400;
-    color: rgba(40, 40, 40, 1);
+    color: var(--blackLawrence);
     font-family: "Roboto";
 }
 
@@ -109,7 +129,7 @@ body {
     font-size: 14px;
     line-height: 19px;
     font-weight: 400;
-    color: rgba(40, 40, 40, 1);
+    color: var(--grayClementine);
     font-family: "Roboto";
 }
 
@@ -118,18 +138,18 @@ body {
     font-size: 14px;
     line-height: 19px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 1);
+    color: var(--whiteMaeve);
     font-family: "Roboto";
-    background-color: rgba(255, 0, 0, 1);
+    background-color: var(--redAshley);
     border-radius: 5px;
-    border-color: rgba(255, 0, 0, 1);
+    border-color: var(--redAshley);
     cursor: pointer;
 }
 
 .reference-btn:active {
-    background-color: rgba(40, 40, 40, 1);
-    color: rgba(255, 0, 0, 1);
-    border-color: rgba(40, 40, 40, 1);
+    background-color: var(--blackLawrence);
+    color: var(--redAshley);
+    border-color: var(--blackLawrence);
 }
 
 .reference-btnBlock {
@@ -141,13 +161,13 @@ body {
     font-size: 14px;
     line-height: 24px;
     font-family: "Roboto";
-    color: rgba(173, 173, 173, 1);
+    color: var(--grayClementine);
     cursor: pointer;
-    border-bottom: 1px solid  rgba(173, 173, 173, 1);
+    border-bottom: 1px solid  var(--grayClementine);
 }
 
 .reference-downText:hover {
-    color: rgba(40, 40, 40, 1);
+    color: var(--blackLawrence);
 }
 
 .bookmark{
@@ -157,7 +177,7 @@ body {
     cursor: pointer; 
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
-    background-color: rgba(40, 40, 40, 1);
+    background-color: var(--blackLawrence);
     background-image: url(../img/book.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -197,7 +217,7 @@ body {
     display: none;
     width: 100%;
     height: 100vh;
-    background-color: #33333396;
+    background-color: var(--blackElsie);
     z-index: 100;
     position: fixed;
 }
@@ -211,7 +231,7 @@ body {
     width: 500px;
     border-radius: 5px;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: var(--whiteMaeve);
     box-shadow: 0px 11px 15px 0px rgba(0, 0, 0, 0.20), 0px 9px 46px 0px rgba(0, 0, 0, 0.12), 0px 24px 38px 0px rgba(0, 0, 0, 0.14);
 }
 
@@ -225,7 +245,7 @@ body {
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: 500;
-    color: rgba(40, 40, 40, 1);
+    color: var(--blackLawrence);
     font-family: "Roboto"; 
 }
 
@@ -236,16 +256,16 @@ body {
 }
 
 .form-btnExit:hover svg path {
-    fill: rgba(40, 40, 40, 1);
+    fill: var(--blackLawrence);
 }
 
 .form-btnExit:active svg path {
-    fill: rgba(40, 40, 40, 1);
+    fill: var(--blackLawrence);
     ;
 }
 
 .form-btnExit:focus svg path {
-    fill: rgba(40, 40, 40, 1);
+    fill: var(--blackLawrence);
     ;
 }
 
@@ -259,7 +279,7 @@ body {
     font-size: 16px;
     line-height: 28px;
     font-weight: 500;
-    color: rgba(40, 40, 40, 1);
+    color: var(--blackLawrence);
     font-family: "Roboto";
 }
 
@@ -271,9 +291,9 @@ body {
 .form-field__data {
     padding: 15px;
     margin-bottom: 15px;
-    border: 1px solid #E2E2E2;
+    border: 1px solid var(--whiteMaeve);
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: var(--whiteMaeve);
     font-size: 14px;
     line-height: 15px;
     font-weight: 400;
@@ -281,15 +301,15 @@ body {
 }
 
 .form-field__data::placeholder{
-    color:  rgba(160, 160, 160, 1);
+    color: var(--whiteMusashi);
 }
 
 .form-field__text {
     padding: 15px;
     margin-bottom: 15px;
-    border: 1px solid #E2E2E2;
-    background-color: rgba(255, 255, 255, 1);
-    color: rgba(160, 160, 160, 1);
+    border: 1px solid var(--whiteEmily);
+    background-color: var(--whiteMaeve);
+    color: var(--whiteMusashi);
     font-size: 14px;
     line-height: 15px;
     font-weight: 400;
@@ -305,13 +325,13 @@ body {
 .form-blockBtn__cansel {
     padding: 14px 55px 14px 55px;
     border-radius: 5px;
-    background-color:  #FCFCFC;
+    background-color: var(--whitePeter);
     color: rgba(40, 40, 40, 1) ;
     font-size: 14px;
     line-height: 15px;
     font-weight: 500;
     font-family: "Roboto";
-    border-color: #FCFCFC;
+    border-color: var(--whitePeter);
     cursor: pointer;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.20), 0px 3px 1px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
 }
@@ -319,13 +339,13 @@ body {
 .form-blockBtn__send {
     padding: 14px 55px 14px 55px;
     border-radius: 5px;
-    background-color: rgba(255, 0, 0, 1);
-    color: rgba(255, 255, 255, 1);
+    background-color: var(--redAshley);
+    color: var(--whiteMaeve);
     font-size: 14px;
     line-height: 15px;
     font-weight: 500;
     font-family: "Roboto";
-    border-color: rgba(255, 0, 0, 1);
+    border-color: var(--redAshley);
     cursor: pointer;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.20), 0px 3px 1px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
 }
