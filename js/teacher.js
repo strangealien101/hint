@@ -103,7 +103,15 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     newhelpElement.insertAdjacentHTML('beforebegin', newHelpString); /* вставляем элемент про который нужно вывести подсказку с оберткой после элемента про который нужно вывести подсказку */
     newhelpElement.remove(); /* удаляем элемент про который нужно вывести подсказку без обертки */
   },
+  choiceOfLocation: function(a){
+    console.log(a);
+    let pageWidth = document.documentElement.scrollWidth;
+    let pageHeight = document.documentElement.scrollHeight;
 
+    let coordNewhelpElementInPageTop = coordNewhelpElementInPage.top + window.scrollY; /* растояние от элемента до конца документа сверху*/
+    let coordNewhelpElementInPageBottom = pageHeight - (coordNewhelpElementInPage.bottom + window.scrollY); /* растояние от элемента до конца документа снизу*/
+
+  },
   insertHint: function(a) { /* Вставляем подсказку */
     /* Вставляем подсказку */
     let modalContant = document.querySelector('.modalContant'); /* находим div обертку элемента, куда нужно вставить подсказку */
@@ -118,16 +126,17 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     if (coordNewhelpElementInPageTop > coordNewhelpElementInPageBottom) { /* если сверху больше, то добавляем подсказку */
     hint.hintСard.querySelector('#modalWindow').style.bottom = 0 + "px";
     modalContant.append(hint.hintСard); 
-    choiceOfLocation(a)
+    /*choiceOfLocation1(a)*/
+    hint.choiceOfLocation(a);
 
     } else { /* если снизу больше, то добавляем подсказку */
     hint.hintСard.querySelector('#modalWindow').style.top = 0 + "px";
     modalContant.append(hint.hintСard);
-    choiceOfLocation(a);
-
+    /*choiceOfLocation1(a);*/
+    hint.choiceOfLocation(a);
     } 
     
-    function choiceOfLocation(a){  /*Определяем с какой стороны вставить подсказку */
+    function choiceOfLocation1(a){  /*Определяем с какой стороны вставить подсказку */
     let hint = document.querySelector('#modalWindow');  /* записываем подсказку в переменную */
     let hintArea = document.querySelector('#modalСontant'); /* записываем область подсказки в переменную */
     let hintElement = document.querySelector('[data-id="' + a + '"]'); /* записываем элемент у которого выводим подсказку в переменную */
