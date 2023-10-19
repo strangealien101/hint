@@ -250,7 +250,8 @@ body {
 .window-list__block {
     width: 400px;
     height: 400px;
-    background-color: brown;
+    background-color: rgb(17, 166, 172);
+    font-size: 64px;
 }
 
 
