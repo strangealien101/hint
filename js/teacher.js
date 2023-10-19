@@ -223,7 +223,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     
 
   } else{
-    console.log('НЕ Ресайз');
+    console.log('НЕ Ресайз1');
   }
 
  },
@@ -290,6 +290,10 @@ document.getElementById('startHlp').onclick = function() {
 */
 startTeacher(hint.countHelp); 
 window.addEventListener('resize', hint.resize);
+
+
+
+
 /* 
 ! =================== КОНЕЦ ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
