@@ -279,7 +279,21 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
         hintArea.style.justifyContent = "center";
       }
   }
- }
+ },
+ resize: function(){
+  if(hint.resizeTimeout == false){
+    console.log('Ресайз ' + hint.countHelp);
+    hint.resizeTimeout = true;
+    setTimeout(function(){hint.resizeTimeout = false;}, 500);
+
+    hint.choiceOfLocation(hint.countHelp);
+
+  } else{
+    console.log('НЕ Ресайз');
+  }
+  
+ },
+ resizeTimeout: false,
 }
 
 
@@ -341,6 +355,7 @@ document.getElementById('startHlp').onclick = function() {
 ! =================== НАЧАЛО ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
 startTeacher(hint.countHelp); 
+this.window.addEventListener('resize', hint.resize);
 /* 
 ! =================== КОНЕЦ ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
