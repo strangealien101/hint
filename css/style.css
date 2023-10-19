@@ -87,7 +87,7 @@ body {
     position: absolute; 
     padding: 25px;
     width: 100%;
-    max-width: 370px;
+    max-width: 310px;
     background-color: var(--grayDolores);
     border-radius: 5px;
     z-index: 2000;
@@ -118,7 +118,7 @@ body {
 
 .modal-text {
     margin-bottom: 15px;
-    width: 286px;
+    
     font-size: 14px;
     line-height: 15px;
     color: var(--grayBernard);
@@ -248,8 +248,9 @@ body {
 
 
 .window-list__block {
-    width: 400px;
-    height: 400px;
+    width: 320px;
+    height: 320px;
+
     background-color: rgb(17, 166, 172);
     font-size: 64px;
 }

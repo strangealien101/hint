@@ -110,8 +110,8 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
   choiceOfLocation: function(a){
     let hintElement = hint.newhelpElement(a); /* записываем элемент у которого выводим подсказку в переменную */
     let hintWindow = document.querySelector('#modalWindow');  /* записываем подсказку в переменную */
-    let modalWidth = hintElement.offsetWidth; /* измеряем длину подсказки в px */
-    let modalHeight = hintElement.offsetHeight; /* измеряем высоту подсказки в px */
+    let modalWidth = hintWindow.offsetWidth; /* измеряем длину подсказки в px */
+    let modalHeight = hintWindow.offsetHeight; /* измеряем высоту подсказки в px */
     let hintArea = document.querySelector('#modalСontant'); /* записываем область подсказки в переменную */
   
     let coordNewhelpElementInPage = hint.newhelpElement(a).getBoundingClientRect();/* вычисляем расположение элемента про который нужно вывести подсказку  */
@@ -130,40 +130,126 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     console.log('coordNewhelpElementInPageTop  расстояние от элемента до конца документа сверху ' + coordNewhelpElementInPageTop);
     console.log('coordNewhelpElementInPageRight  расстояние от элемента до конца документа справа ' + coordNewhelpElementInPageRight);
     console.log('coordNewhelpElementInPageBottom  расстояние от элемента до конца документа снизу ' + coordNewhelpElementInPageBottom);
-    console.log('modalWidth находим ширину страницы ' + coordNewhelpElementInPageLeft);
-    console.log('modalHeight  измеряем высоту подсказки в px ' + coordNewhelpElementInPageLeft);
+    console.log('modalWidth измеряем длину подсказки в px ' + modalWidth);
+    console.log('modalHeight  измеряем высоту подсказки в px ' + modalHeight);
+  /* Сбрасываем стиль*/
+    hintWindow.style.top = "auto";
+    hintWindow.style.bottom = "auto";
+    hintWindow.style.left = "auto";
+    hintWindow.style.right = "auto";
+
+    let xPosition;
+    if( coordNewhelpElementInPageLeft > coordNewhelpElementInPageRight){  
+     xPosition = 'Лево'
+    } else{
+      xPosition = 'Право'
+    }
+    let yPosition;
+    if( coordNewhelpElementInPageBottom < modalHeight/2 ){  
+      yPosition = 'Верх'
+     } else if(coordNewhelpElementInPageTop < modalHeight/2){
+      yPosition = 'Низ'
+     } else {
+      yPosition = 'Середина'
+     }
+    let overflow;
+    if( coordNewhelpElementInPageLeft < modalWidth/2 ){  
+      overflow = 'НЕТ места СЛЕВА'
+     } else if(coordNewhelpElementInPageRight < modalWidth/2 ){
+      overflow = 'НЕТ места СПРАВА'
+     }else {
+      overflow = 'Места хватает'
+     }
+     let overflowPageWidth;
+     if(pageWidth > (helpWindowInPageWidth + 30 + modalWidth)){  
+      overflowPageWidth = 'Помещается по ширине'
+     } else {
+      overflowPageWidth = 'НЕ Помещается по ширине'
+     }
+     console.log('============================================================')
+     console.log('xPosition ' + xPosition)
+     console.log('yPosition ' + yPosition)
+     console.log('overflow ' + overflow)
+     console.log('overflowPageWidth ' + overflowPageWidth)
+     console.log('============================================================')
+
+
+     if (xPosition == 'Право' && yPosition == 'Середина' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'Помещается по ширине') { 
+      console.log('4 право');
+      hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
+      hintArea.style.justifyContent = "center"; 
+      } else if (xPosition == 'Лево' && yPosition == 'Середина' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
+        console.log('5 лево');
+        hintWindow.style.right = helpWindowInPageWidth + 20 + "px";     
+        } else if (xPosition == 'Лево' && yPosition == 'Середина' && overflow == 'НЕТ места СПРАВА' && overflowPageWidth == 'Помещается по ширине') { 
+          console.log('5 лево');
+          hintWindow.style.right = helpWindowInPageWidth + 20 + "px";       
+          } else if (xPosition == 'Право' && yPosition == 'Середина' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
+            console.log('4 право');
+            hintWindow.style.left = helpWindowInPageWidth + 20 + "px";    
+            } else if (xPosition == 'Право' && yPosition == 'Низ' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'Помещается по ширине') { 
+              console.log('1 право верхний угол');
+              hintWindow.style.top = helpWindowInPageHeight + 20 + "px";
+              hintWindow.style.left = "20px";   
+              } else if (xPosition == 'Лево' && yPosition == 'Низ' && overflow == 'НЕТ места СПРАВА' && overflowPageWidth == 'Помещается по ширине') { 
+                console.log('2 лево верхний угол');
+                hintWindow.style.top = helpWindowInPageHeight + 20 + "px";
+                hintWindow.style.right = "20px";
+                } else if (xPosition == 'Лево' && yPosition == 'Низ' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
+                  console.log('3 низ');
+                  hintWindow.style.top = helpWindowInPageHeight + 20 + "px";
+                  hintArea.style.justifyContent = "center"
+                  } else if (xPosition == 'Право' && yPosition == 'Верх' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'Помещается по ширине') { 
+                    console.log('7 право нижний угол');
+                    hintWindow.style.left = "20px";
+                    hintWindow.style.bottom = helpWindowInPageHeight + 20 + "px";
+                    } else if (xPosition == 'Лево' && yPosition == 'Верх' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
+                      console.log('8 вверх');
+                      hintWindow.style.bottom = helpWindowInPageWidth + 20 + "px";
+                      hintArea.style.justifyContent = "center";
+                      } else if (xPosition == 'Право' && yPosition == 'Верх' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
+                        console.log('8 вверх');
+                        hintWindow.style.bottom = helpWindowInPageHeight + 20 + "px";
+                        hintArea.style.justifyContent = "center"
+                        } else if (xPosition == 'Лево' && yPosition == 'Верх' && overflow == 'НЕТ места СПРАВА' && overflowPageWidth == 'Помещается по ширине') { 
+                          console.log('88 вверх');
+                          hintWindow.style.right = "20px";
+                          hintWindow.style.bottom = helpWindowInPageHeight + 20 + "px";
+                          }
   
 
-    if (coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageTop < modalHeight/2) { /* Право верхний угол */
+/*
+    if (coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageTop < modalHeight/2) { 
       console.log('1 право верхний угол');
       hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
       hintWindow.style.top = "20px";
       hintWindow.style.bottom = "auto";
 
    
-      } else if (coordNewhelpElementInPageRight < modalWidth/2 && coordNewhelpElementInPageTop < modalHeight/2) { /* лево */
+      } else if (coordNewhelpElementInPageRight < modalWidth/2 && coordNewhelpElementInPageTop < modalHeight/2) { 
         console.log('2 лево верхний угол');
         hintWindow.style.right = helpWindowInPageWidth + 20 + "px";
         hintWindow.style.top = "20px";
         hintWindow.style.bottom = "auto";
       }
 
-      else if (coordNewhelpElementInPageTop < modalHeight/2 && coordNewhelpElementInPageLeft > modalWidth/2 && coordNewhelpElementInPageRight > modalWidth/2) { /* расстояние от элемента до конца документа снизу*/
+      else if (coordNewhelpElementInPageTop < modalHeight/2 && coordNewhelpElementInPageLeft > modalWidth/2 && coordNewhelpElementInPageRight > modalWidth/2) { 
         console.log('3 низ');
         hintWindow.style.top = helpWindowInPageHeight + 20 + "px";
         hintWindow.style.bottom = "auto";
         hintArea.style.justifyContent = "center"
       }
 
-      else if (coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageTop > modalHeight) { /* расстояние от элемента до конца документа снизу*/
+      else if (coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageRight > coordNewhelpElementInPageLeft && modalWidth + helpWindowInPageWidth + 20 > pageWidth) { 
         console.log('4 право');
+        console.log(coordNewhelpElementInPageTop > modalHeight);  
         hintWindow.style.bottom = "auto";
         hintWindow.style.top = "auto";
         hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
         hintWindow.style.bottom = "auto";
         hintArea.style.justifyContent = "center";  
 
-      } else if (coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight < modalWidth/2) { /* расстояние от элемента до конца документа снизу*/
+      } else if (coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageLeft > modalWidth) { 
         console.log('5 лево');
         hintWindow.style.bottom = "auto";
         hintWindow.style.top = "auto";
@@ -171,37 +257,37 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
         hintWindow.style.bottom = "auto";
         hintArea.style.justifyContent = "center";
 
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight < modalWidth/2) { /* расстояние от элемента до конца документа снизу*/
+      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageRight < modalWidth/2) { 
         console.log('6 лево нижний угол');
         hintWindow.style.bottom = "20px";
         hintWindow.style.top = "auto";
         hintWindow.style.right = helpWindowInPageWidth + 20 + "px";
 
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageTop > modalHeight) { /* расстояние от элемента до конца документа снизу*/
+      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageLeft < modalWidth/2 ) { 
         console.log('7 право нижний угол');
         hintWindow.style.top = "auto";
         hintWindow.style.right = "auto";
         hintWindow.style.bottom = "20px";
         hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
 
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageTop > modalHeight) { /* расстояние от элемента до конца документа снизу*/
+      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageTop > modalHeight) { /* расстояние от элемента до конца документа снизу
         console.log('8 вверх');
         hintWindow.style.top = "auto";
         hintWindow.style.right = "auto";
         hintWindow.style.bottom = helpWindowInPageWidth + 20 + "px";
         hintArea.style.justifyContent = "center";
 
-      } /*else if  (coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageRight > modalWidth) { 
+      } *//*else if  (coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageRight > modalWidth) { 
         console.log('9');
         hintWindow.style.top = "auto";
         hintWindow.style.right = "auto";
         hintWindow.style.bottom = "auto";
         hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
         hintArea.style.justifyContent = "center";
-      }*/
+      }
       else {
         console.log('не нашлось позиционирования')
-      }
+      }*/
     
 
 
