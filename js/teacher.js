@@ -103,13 +103,19 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     newhelpElement.insertAdjacentHTML('beforebegin', newHelpString); /* вставляем элемент про который нужно вывести подсказку с оберткой после элемента про который нужно вывести подсказку */
     newhelpElement.remove(); /* удаляем элемент про который нужно вывести подсказку без обертки */
   },
+ 
   choiceOfLocation: function(a){
-    console.log(a);
-    let pageWidth = document.documentElement.scrollWidth;
-    let pageHeight = document.documentElement.scrollHeight;
+    
+    let hintElement = hint.newhelpElement(a); /* записываем элемент у которого выводим подсказку в переменную */
+    let coordNewhelpElementInPage = hint.newhelpElement(a).getBoundingClientRect();/* вычисляем расположение элемента про который нужно вывести подсказку  */
+    let modalWidth = hintElement.offsetWidth; /* измеряем длину подсказки в px */
+    let modalHeight = hintElement.offsetHeight; /* измеряем высоту подсказки в px */
+    let helpWindowInPageWidth = hintElement.offsetWidth; /* измеряем длину элемента про который нужно вывести подсказку в px */
+    let helpWindowInPageHeight = hintElement.offsetHeight; /* измеряем высоту элемента про который нужно вывести подсказку в px */
 
-    let coordNewhelpElementInPageTop = coordNewhelpElementInPage.top + window.scrollY; /* растояние от элемента до конца документа сверху*/
-    let coordNewhelpElementInPageBottom = pageHeight - (coordNewhelpElementInPage.bottom + window.scrollY); /* растояние от элемента до конца документа снизу*/
+
+    console.log(coordNewhelpElementInPage);
+
 
   },
   insertHint: function(a) { /* Вставляем подсказку */
