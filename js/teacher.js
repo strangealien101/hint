@@ -133,10 +133,10 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     
  },
  choiceOfLocation: function(a){  /*Определяем с какой стороны вставить подсказку */
-
- let modalContant = document.querySelector('.modalContant'); /* находим div обертку элемента, куда нужно вставить подсказку */
- let coordNewhelpElementInPage = hint.newhelpElement(a).getBoundingClientRect();/* вычисляем расположение элемента про который нужно вывести подсказку  */
-
+console.log(document.querySelector('[data-id="' + a + '"]'));
+    let coordNewhelpElementInPage = document.querySelector('[data-id="' + a + '"]').getBoundingClientRect();/* вычисляем расположение элемента про который нужно вывести подсказку  */
+    let pageWidth = document.documentElement.scrollWidth;
+    let pageHeight = document.documentElement.scrollHeight;
     let hint = document.querySelector('#modalWindow');  /* записываем подсказку в переменную */
     let hintArea = document.querySelector('#modalСontant'); /* записываем область подсказки в переменную */
     let hintElement = document.querySelector('[data-id="' + a + '"]'); /* записываем элемент у которого выводим подсказку в переменную */
