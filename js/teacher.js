@@ -108,6 +108,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
   },
  
   choiceOfLocation: function(a){
+   
     let hintWindow = document.querySelector('#modalWindow');  /* записываем подсказку в переменную */
     let hintArea = document.querySelector('#modalСontant'); /* записываем область подсказки в переменную */
     let hintElement = hint.newhelpElement(a); /* записываем элемент у которого выводим подсказку в переменную */
@@ -199,102 +200,32 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     if (coordNewhelpElementInPageTop > coordNewhelpElementInPageBottom) { /* если сверху больше, то добавляем подсказку */
     hint.hintСard.querySelector('#modalWindow').style.bottom = 0 + "px";
     modalContant.append(hint.hintСard); 
-    /*choiceOfLocation1(a)*/
+   
     hint.choiceOfLocation(a);
 
     } else { /* если снизу больше, то добавляем подсказку */
     hint.hintСard.querySelector('#modalWindow').style.top = 0 + "px";
     modalContant.append(hint.hintСard);
-    /*choiceOfLocation1(a);*/
+
     hint.choiceOfLocation(a);
     } 
     
-    function choiceOfLocation1(a){  /*Определяем с какой стороны вставить подсказку */
-    let hint = document.querySelector('#modalWindow');  /* записываем подсказку в переменную */
-    let hintArea = document.querySelector('#modalСontant'); /* записываем область подсказки в переменную */
-    let hintElement = document.querySelector('[data-id="' + a + '"]'); /* записываем элемент у которого выводим подсказку в переменную */
- 
-    let modalWidth = hintElement.offsetWidth; /* измеряем длину подсказки в px */
-    let modalHeight = hintElement.offsetHeight; /* измеряем высоту подсказки в px */
-    let helpWindowInPageWidth = hintElement.offsetWidth; /* измеряем длину элемента про который нужно вывести подсказку в px */
-    let helpWindowInPageHeight = hintElement.offsetHeight; /* измеряем высоту элемента про который нужно вывести подсказку в px */
 
-    let coordNewhelpElementInPageLeft = coordNewhelpElementInPage.left + window.scrollX; /* расстояние от элемента до конца документа слева */
-    let coordNewhelpElementInPageTop = coordNewhelpElementInPage.top + window.scrollY; /* расстояние от элемента до конца документа сверху*/
-    let coordNewhelpElementInPageRight = pageWidth - (coordNewhelpElementInPage.right + window.scrollX); /* расстояние от элемента до конца документа справа*/
-    let coordNewhelpElementInPageBottom = pageHeight - (coordNewhelpElementInPage.bottom + window.scrollY); /* расстояние от элемента до конца документа снизу*/
-
-    if (coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageTop < modalHeight/2) { 
-      
-      hint.style.left = helpWindowInPageWidth + 20 + "px";
-      hint.style.top = "20px";
-      hint.style.bottom = "auto";
-
-   
-      } else if (coordNewhelpElementInPageRight < modalWidth/2 && coordNewhelpElementInPageTop < modalHeight/2) {
-        hint.style.right = helpWindowInPageWidth + 20 + "px";
-        hint.style.top = "20px";
-        hint.style.bottom = "auto";
-      }
-
-      else if (coordNewhelpElementInPageTop < modalHeight/2 && coordNewhelpElementInPageLeft > modalWidth/2 && coordNewhelpElementInPageRight > modalWidth/2) {
-        hint.style.top = helpWindowInPageHeight + 20 + "px";
-        hint.style.bottom = "auto";
-        hintArea.style.justifyContent = "center"
-      }
-
-      else if (coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageTop > modalHeight) {
-        hint.style.bottom = "auto";
-        hint.style.top = "auto";
-        hint.style.left = helpWindowInPageWidth + 20 + "px";
-        hint.style.bottom = "auto";
-        hintArea.style.justifyContent = "center";  
-
-      } else if (coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight < modalWidth/2) {
-        hint.style.bottom = "auto";
-        hint.style.top = "auto";
-        hint.style.right = helpWindowInPageWidth + 20 + "px";
-        hint.style.bottom = "auto";
-        hintArea.style.justifyContent = "center";
-
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight < modalWidth/2) {
-        hint.style.bottom = "20px";
-        hint.style.top = "auto";
-        hint.style.right = helpWindowInPageWidth + 20 + "px";
-
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageTop > modalHeight) {
-        hint.style.top = "auto";
-        hint.style.right = "auto";
-        hint.style.bottom = "20px";
-        hint.style.left = helpWindowInPageWidth + 20 + "px";
-
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageTop > modalHeight) {
-        hint.style.top = "auto";
-        hint.style.right = "auto";
-        hint.style.bottom = helpWindowInPageWidth + 20 + "px";
-        hintArea.style.justifyContent = "center";
-
-      } else if  (coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageRight > modalWidth) {
-        hint.style.top = "auto";
-        hint.style.right = "auto";
-        hint.style.bottom = "auto";
-        hint.style.left = helpWindowInPageWidth + 20 + "px";
-        hintArea.style.justifyContent = "center";
-      }
-  }
  },
  resize: function(){
-  if(hint.resizeTimeout == false){
-    console.log('Ресайз ' + hint.countHelp);
-    hint.resizeTimeout = true;
-    setTimeout(function(){hint.resizeTimeout = false;}, 500);
+  console.log('Ресайз !!!!');
 
+  if(hint.resizeTimeout == false){
+    
+    hint.resizeTimeout = true;
+    setTimeout(function(){hint.resizeTimeout = false;}, 1500);
     hint.choiceOfLocation(hint.countHelp);
+    
 
   } else{
     console.log('НЕ Ресайз');
   }
-  
+
  },
  resizeTimeout: false,
 }
@@ -358,7 +289,7 @@ document.getElementById('startHlp').onclick = function() {
 ! =================== НАЧАЛО ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
 startTeacher(hint.countHelp); 
-this.window.addEventListener('resize', hint.resize);
+window.addEventListener('resize', hint.resize);
 /* 
 ! =================== КОНЕЦ ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
