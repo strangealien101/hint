@@ -3,6 +3,9 @@
 window.addEventListener('load', function open(){   /* Запуск обучения при загрузке страницы */
 /*------------------- Высплывающая подсказка у элемента -----------------------*/
 
+
+
+
  let user = {
   trainingCompleted: false,   /* Проходил ли пользователь обучение? */
  }
@@ -118,16 +121,22 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     if (coordNewhelpElementInPageTop > coordNewhelpElementInPageBottom) { /* если сверху больше, то добавляем подсказку */
     hint.hintСard.querySelector('#modalWindow').style.bottom = 0 + "px";
     modalContant.append(hint.hintСard); 
-    choiceOfLocation(a)
+    hint.choiceOfLocation(a)
 
     } else { /* если снизу больше, то добавляем подсказку */
     hint.hintСard.querySelector('#modalWindow').style.top = 0 + "px";
     modalContant.append(hint.hintСard);
-    choiceOfLocation(a);
+    hint.choiceOfLocation(a);
 
     } 
     
-    function choiceOfLocation(a){  /*Определяем с какой стороны вставить подсказку */
+    
+ },
+ choiceOfLocation: function(a){  /*Определяем с какой стороны вставить подсказку */
+
+ let modalContant = document.querySelector('.modalContant'); /* находим div обертку элемента, куда нужно вставить подсказку */
+ let coordNewhelpElementInPage = hint.newhelpElement(a).getBoundingClientRect();/* вычисляем расположение элемента про который нужно вывести подсказку  */
+
     let hint = document.querySelector('#modalWindow');  /* записываем подсказку в переменную */
     let hintArea = document.querySelector('#modalСontant'); /* записываем область подсказки в переменную */
     let hintElement = document.querySelector('[data-id="' + a + '"]'); /* записываем элемент у которого выводим подсказку в переменную */
@@ -200,7 +209,8 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
         hintArea.style.justifyContent = "center";
       }
   }
- }
+
+
 }
 
 
@@ -262,6 +272,13 @@ document.getElementById('startHlp').onclick = function() {
 ! =================== НАЧАЛО ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
 startTeacher(hint.countHelp); 
+
+window.addEventListener('resize', resize);
+
+function resize() {
+  console.log('nnnn');
+}
+
 /* 
 ! =================== КОНЕЦ ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
@@ -275,6 +292,6 @@ startTeacher(hint.countHelp);
  * метод заполнения массива
  * метод тру\фолс
  * заменить удаление элемента на скрытие его через видимость или использовать наложение css
- * Переполнение в плашке с подсказко
+ * Переполнение в плашке с подсказок
  */
 
