@@ -116,6 +116,10 @@ body {
 .reference-textBlock {
     display: flex;
     flex-direction: row;
+    overflow: auto;
+    max-height: calc(100vh - 320px);
+    padding-right: 10px;
+    margin-bottom: 20px;
 }
 
 .reference-icon {

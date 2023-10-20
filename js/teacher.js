@@ -16,104 +16,113 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
  let hint = {
  
   modalTextWindow: [
-    {title: 'Создание программы', fieldModal: 'Это поля, которые необходимо заполнить.'},
-    {title: 'Создание программы', fieldModal: 'В периоде действия указывается, когда программа будет доступна.'},
-    {title: 'Создание программы', fieldModal: 'Это поля, которыМожно дать доступ к программе сразу всем розничным и/или оптовым компаниям.е необходимо заполнить.'},
-    {title: 'Создание программы', fieldModal: 'Можно дать доступ к программе только определенным компаниям.'},
-    {title: 'Создание программы', fieldModal: 'После нажатия на кнопку «Добавить» программа появится в системе.'},
-    {title: 'Создание программы', fieldModal: 'После нажатия на кнопку «Добавить» программа появится в системе.'},
+    {id: 'id0', title: '1Создание программы', fieldModal: 'Это поля, которые необходимо заполнить.'},
+    {id: 'id1', title: '2Создание программы', fieldModal: 'В периоде действия указывается, когда программа будет доступна.'},
+    {id: 'id2', title: '3Создание программы', fieldModal: 'Это поля, которыМожно дать доступ к программе сразу всем розничным и/или оптовым компаниям.е необходимо заполнить.'},
+    {id: 'id3', title: 'Создание программы', fieldModal: 'Можно дать доступ к программе только определенным компаниям.'},
+    {id: 'id4', title: 'Создание программы', fieldModal: 'После нажатия на кнопку «Добавить» программа появится в системе.'},
+    {id: 'id5', title: 'Создание программы', fieldModal: 'После нажатия на кнопку «Добавить» программа появится в системе.'},
   ],
+
+
   countHelp: 0,  /* Счетчик порядка подсказок, соответсвует data-id="1" */
   styleWndw: document.getElementById('bckgModalTH'), /* Находим фон */
   visibilityPage: function(){
       hint.styleWndw.classList.toggle('modalBGTH');
   },
 
+
   hintСard: 0, /* Сохраняем подсказку*/
   helpData: document.querySelectorAll('[data-id]'),
   createHint: function(a) {/* Формируем подсказку*/
-
     let template = document.querySelector('#templateHelpWindow') /* находим шаблон подсказки */ 
     let helpWindow = template.content.cloneNode(true); /* копируем шаблон */ 
-    
     let modalHeaderText = helpWindow.querySelector('.modal-header__text'); /* находим заголовок подсказки */ 
     let modalText = helpWindow.querySelector('.modal-text');  /* находим текст-описание подсказки */ 
     modalHeaderText.textContent = hint.modalTextWindow[a].title; /* вставляем текст-заголовок подсказки */ 
     modalText.textContent = hint.modalTextWindow[a].fieldModal; /* вставляем текст-описание подсказки */ 
-    
-
     let exitBtnTH = helpWindow.getElementById('exitTH'); /* нашли кнопку "Закрыть" */
     let nextBtnTH = helpWindow.getElementById('nextTH'); /* нашли кнопку "Далее" */
     let previousBtnTH = helpWindow.getElementById('previousTH'); /* нашли кнопку "Назад" */
-
-
     if(hint.countHelp > 0) {    /* Если длина счётчика подсказок больше 0, то появляется кнопка "Назад" */           
       previousBtnTH.style.display = 'block';
     }
-  
     if(hint.countHelp == (hint.modalTextWindow.length-1) || hint.countHelp == (hint.helpData.length - 1)) { /* Если длина массива с текстом подсказки равна длинне счётчика или длина счётчика равна длине найденных ID, то убираем кнопку "Далее" */ 
       nextBtnTH.style.display = 'none';
     }
-
-
-
     /* Обработка события кнопки "Закрыть" - Закрытие модального окна подсказки и выход из обучения */
-    exitBtnTH.addEventListener('click', exitTeacher);
-    function exitTeacher(){
+    exitBtnTH.addEventListener('click', exitTeacher.bind(exitBtnTH, a));
+    function exitTeacher(a){
       /* Закрытие модального окна  */
+      console.log('------------+---------');
+      console.log(hint.modalTextWindow[a].id);
+      console.log(a);
+      console.log('---------------------');
       user.trainingCompleted = true;
       hint.visibilityPage();
-      hint.returnElementState(a);
-  
+      hint.returnElementState(hint.modalTextWindow[a]);
+
       hint.countHelp = 0;
     } 
-
- 
-
      /* Обработка события кнопки "Далее" */
-     nextBtnTH.addEventListener('click', nextTeacher);
-     function nextTeacher(){
+     nextBtnTH.addEventListener('click', nextTeacher.bind(nextBtnTH, a));
+     function nextTeacher(a){
        hint.countHelp = hint.countHelp + 1; /* увеличиваем счетчик на 1 */
-       hint.returnElementState(a);
+       hint.returnElementState(hint.modalTextWindow[a]);
        hint.visibilityPage();
        startTeacher(hint.countHelp);
      }
      /* Обработка события кнопки "Назад" */
-    previousBtnTH.addEventListener('click', previousTeacher);
-    function previousTeacher(){
+    previousBtnTH.addEventListener('click', previousTeacher.bind(previousBtnTH, a));
+    function previousTeacher(a){
       hint.countHelp = hint.countHelp - 1; /* уменьшаем счетчик на 1 */
-      hint.returnElementState(a);
+      hint.returnElementState(hint.modalTextWindow[a]);
       hint.visibilityPage();
       startTeacher(hint.countHelp);
     }
-    
     hint.hintСard = helpWindow; /* созданную карточку положили в метод объекта*/ 
-    
-
   },
+
+
   returnElementState: function(a){ /* Удаляем подсвеченный элемент и возвращаем верстку в первоначальный вид*/ 
-    document.querySelector('.modalContant').after(hint.newhelpElement(a));  /*вставляем копию кнопки которую обернули после обернутой кнопки */
+   /**
+    * ! document.querySelector('.modalContant').after(hint.newhelpElement(a));  /*вставляем копию кнопки которую обернули после обернутой кнопки */
+    console.log('++++++++++++++++++++++++');
+    console.log(a);
+    console.log('++++++++++++++++++++++++');
+    console.log(document.querySelectorAll('[data-id="' + a.id + '"]'));
+    let newhelpElement = document.querySelectorAll('[data-id="' + a.id + '"]');
+    newhelpElement[1].style.opacity = '1';
+    newhelpElement[1].style.position = '';
     document.querySelector('.modalContant').remove();  /* удаляем обертку и все, что в ней */
   },
   newhelpElement: function(a){
-    return document.querySelector('[data-id="' + a + '"]'); /* Находим элемент у которого нужно вставить подсказку*/ 
+    return document.querySelector('[data-id="' + a.id + '"]'); /* Находим элемент у которого нужно вставить подсказку*/ 
   },
 
   preparingPlacesForHints: function(a){ /* Подготавливаем место для подсказки*/ 
     /* Находим место куда нужно вставить подсказку и подготоваливаем его */
-    let newhelpElement = document.querySelector('[data-id="' + a + '"]'); /* Находим элемент у которого нужно вставить подсказку*/ 
+    console.log('preparingPlacesForHints');
+    console.log(a);
+    let newhelpElement = document.querySelector('[data-id="' + a.id + '"]'); /* Находим элемент у которого нужно вставить подсказку*/ 
     let newHelpString = '<div id="modalСontant" class="modalContant">'+ newhelpElement.outerHTML+'</div>'; /* оборачиваем элемент про который нужно вывести подсказку */
-    newhelpElement.insertAdjacentHTML('beforebegin', newHelpString); /* вставляем элемент про который нужно вывести подсказку с оберткой после элемента про который нужно вывести подсказку */
-    newhelpElement.remove(); /* удаляем элемент про который нужно вывести подсказку без обертки */
+    newhelpElement.insertAdjacentHTML('beforebegin', newHelpString); /* вставляем элемент про который нужно вывести подсказку с оберткой перед элементом про который нужно вывести подсказку */
+   /**
+    * ! newhelpElement.remove(); /* удаляем элемент про который нужно вывести подсказку без обертки */
+    newhelpElement.style.opacity = '0';
+    newhelpElement.style.position = 'absolute';
   },
  
-  choiceOfLocation: function(a){
+  choiceOfLocation: function(a, b){
+    console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYY')
+    console.log(a);
+    console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYY')
     let hintElement = hint.newhelpElement(a); /* записываем элемент у которого выводим подсказку в переменную */
     let hintWindow = document.querySelector('#modalWindow');  /* записываем подсказку в переменную */
     let modalWidth = hintWindow.offsetWidth; /* измеряем длину подсказки в px */
     let modalHeight = hintWindow.offsetHeight; /* измеряем высоту подсказки в px */
     let hintArea = document.querySelector('#modalСontant'); /* записываем область подсказки в переменную */
-  
+
     let coordNewhelpElementInPage = hint.newhelpElement(a).getBoundingClientRect();/* вычисляем расположение элемента про который нужно вывести подсказку  */
   
     let helpWindowInPageWidth = hintElement.offsetWidth; /* измеряем длину элемента про который нужно вывести подсказку в px */
@@ -292,10 +301,14 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
 
 
   },
-  insertHint: function(a) { /* Вставляем подсказку */
+  insertHint: function(a, b) { /* Вставляем подсказку */
     /* Вставляем подсказку */
     let modalContant = document.querySelector('.modalContant'); /* находим div обертку элемента, куда нужно вставить подсказку */
+    console.log('hint.newhelpElement(a.id).getBoundingClientRect()');
+    console.log(a);
+    console.log(a.id);
     let coordNewhelpElementInPage = hint.newhelpElement(a).getBoundingClientRect();/* вычисляем расположение элемента про который нужно вывести подсказку  */
+    console.log(coordNewhelpElementInPage);
     let pageWidth = document.documentElement.scrollWidth; /* находим ширину страницы */
     let pageHeight = document.documentElement.scrollHeight; /* находим высоту страницы */
 
@@ -306,14 +319,11 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     if (coordNewhelpElementInPageTop > coordNewhelpElementInPageBottom) { /* если сверху больше, то добавляем подсказку */
     hint.hintСard.querySelector('#modalWindow').style.bottom = 0 + "px";
     modalContant.append(hint.hintСard); 
-   
-    hint.choiceOfLocation(a);
-
+    hint.choiceOfLocation(a, b);
     } else { /* если снизу больше, то добавляем подсказку */
     hint.hintСard.querySelector('#modalWindow').style.top = 0 + "px";
     modalContant.append(hint.hintСard);
-
-    hint.choiceOfLocation(a);
+    hint.choiceOfLocation(a, b);
     } 
     
 
@@ -324,8 +334,8 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
   if(hint.resizeTimeout == false){
     
     hint.resizeTimeout = true;
-    setTimeout(function(){hint.resizeTimeout = false;}, 100);
-    hint.choiceOfLocation(hint.countHelp);
+    setTimeout(function(){hint.resizeTimeout = false;}, 500);
+    hint.choiceOfLocation(hint.modalTextWindow[hint.countHelp]);
     
 
   } else{
@@ -345,8 +355,11 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     /*hint.hidePage();  скрываем фон */
     hint.visibilityPage()
     hint.createHint(a); /* создаем подсказку */
-    hint.preparingPlacesForHints(a); /* готовим место для подсказки */
-    hint.insertHint(a); /* вставляем подсказку */
+    let modalTextWindowHint = hint.modalTextWindow[a];
+    console.log('modalTextWindowHint ' + modalTextWindowHint);
+    console.log(modalTextWindowHint);
+    hint.preparingPlacesForHints(modalTextWindowHint); /* готовим место для подсказки */
+    hint.insertHint(modalTextWindowHint, a); /* вставляем подсказку */
   } 
   
 }
@@ -408,11 +421,10 @@ window.addEventListener('resize', hint.resize);
 
 /** 
  * ! Задание
- * ресайз подсказки
- * id у подсказок
+ * ресайз подсказки ДА
+ * id у подсказок ДА
  * метод заполнения массива
- * метод тру\фолс
- * заменить удаление элемента на скрытие его через видимость или использовать наложение css
- * Переполнение в плашке с подсказок
+ * заменить удаление элемента на скрытие его через видимость или использовать наложение css ДА
+ * Переполнение в плашке с подсказок ДА
  */
 
