@@ -50,20 +50,24 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     if(hint.countHelp == (hint.modalTextWindow.length-1) || hint.countHelp == (hint.helpData.length - 1)) { /* Если длина массива с текстом подсказки равна длинне счётчика или длина счётчика равна длине найденных ID, то убираем кнопку "Далее" */ 
       nextBtnTH.style.display = 'none';
     }
+
+
+
     /* Обработка события кнопки "Закрыть" - Закрытие модального окна подсказки и выход из обучения */
     exitBtnTH.addEventListener('click', exitTeacher.bind(exitBtnTH, a));
     function exitTeacher(a){
+
+
+
       /* Закрытие модального окна  */
-      console.log('------------+---------');
-      console.log(hint.modalTextWindow[a].id);
-      console.log(a);
-      console.log('---------------------');
       user.trainingCompleted = true;
       hint.visibilityPage();
       hint.returnElementState(hint.modalTextWindow[a]);
-
       hint.countHelp = 0;
     } 
+
+
+
      /* Обработка события кнопки "Далее" */
      nextBtnTH.addEventListener('click', nextTeacher.bind(nextBtnTH, a));
      function nextTeacher(a){
@@ -72,6 +76,8 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
        hint.visibilityPage();
        startTeacher(hint.countHelp);
      }
+
+
      /* Обработка события кнопки "Назад" */
     previousBtnTH.addEventListener('click', previousTeacher.bind(previousBtnTH, a));
     function previousTeacher(a){
@@ -85,38 +91,27 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
 
 
   returnElementState: function(a){ /* Удаляем подсвеченный элемент и возвращаем верстку в первоначальный вид*/ 
-   /**
-    * ! document.querySelector('.modalContant').after(hint.newhelpElement(a));  /*вставляем копию кнопки которую обернули после обернутой кнопки */
-    console.log('++++++++++++++++++++++++');
-    console.log(a);
-    console.log('++++++++++++++++++++++++');
-    console.log(document.querySelectorAll('[data-id="' + a.id + '"]'));
+
     let newhelpElement = document.querySelectorAll('[data-id="' + a.id + '"]');
     newhelpElement[1].style.opacity = '1';
     newhelpElement[1].style.position = '';
     document.querySelector('.modalContant').remove();  /* удаляем обертку и все, что в ней */
   },
+
   newhelpElement: function(a){
     return document.querySelector('[data-id="' + a.id + '"]'); /* Находим элемент у которого нужно вставить подсказку*/ 
   },
 
   preparingPlacesForHints: function(a){ /* Подготавливаем место для подсказки*/ 
     /* Находим место куда нужно вставить подсказку и подготоваливаем его */
-    console.log('preparingPlacesForHints');
-    console.log(a);
     let newhelpElement = document.querySelector('[data-id="' + a.id + '"]'); /* Находим элемент у которого нужно вставить подсказку*/ 
     let newHelpString = '<div id="modalСontant" class="modalContant">'+ newhelpElement.outerHTML+'</div>'; /* оборачиваем элемент про который нужно вывести подсказку */
     newhelpElement.insertAdjacentHTML('beforebegin', newHelpString); /* вставляем элемент про который нужно вывести подсказку с оберткой перед элементом про который нужно вывести подсказку */
-   /**
-    * ! newhelpElement.remove(); /* удаляем элемент про который нужно вывести подсказку без обертки */
     newhelpElement.style.opacity = '0';
     newhelpElement.style.position = 'absolute';
   },
  
   choiceOfLocation: function(a, b){
-    console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYY')
-    console.log(a);
-    console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYY')
     let hintElement = hint.newhelpElement(a); /* записываем элемент у которого выводим подсказку в переменную */
     let hintWindow = document.querySelector('#modalWindow');  /* записываем подсказку в переменную */
     let modalWidth = hintWindow.offsetWidth; /* измеряем длину подсказки в px */
@@ -135,12 +130,6 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     let coordNewhelpElementInPageBottom = pageHeight - (coordNewhelpElementInPage.bottom + window.scrollY); /* расстояние от элемента до конца документа снизу*/
     
 
-    console.log('coordNewhelpElementInPageLeft  расстояние от элемента до конца документа слева ' + coordNewhelpElementInPageLeft);
-    console.log('coordNewhelpElementInPageTop  расстояние от элемента до конца документа сверху ' + coordNewhelpElementInPageTop);
-    console.log('coordNewhelpElementInPageRight  расстояние от элемента до конца документа справа ' + coordNewhelpElementInPageRight);
-    console.log('coordNewhelpElementInPageBottom  расстояние от элемента до конца документа снизу ' + coordNewhelpElementInPageBottom);
-    console.log('modalWidth измеряем длину подсказки в px ' + modalWidth);
-    console.log('modalHeight  измеряем высоту подсказки в px ' + modalHeight);
   /* Сбрасываем стиль*/
     hintWindow.style.top = "auto";
     hintWindow.style.bottom = "auto";
@@ -148,15 +137,15 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     hintWindow.style.right = "auto";
 
     let xPosition;
-    if( coordNewhelpElementInPageLeft > coordNewhelpElementInPageRight){  
+    if ( coordNewhelpElementInPageLeft > coordNewhelpElementInPageRight) {  
      xPosition = 'Лево'
     } else{
       xPosition = 'Право'
     }
     let yPosition;
-    if( coordNewhelpElementInPageBottom < modalHeight/2 ){  
+    if ( coordNewhelpElementInPageBottom < modalHeight/2 ) {  
       yPosition = 'Верх'
-     } else if(coordNewhelpElementInPageTop < modalHeight/2){
+     } else if(coordNewhelpElementInPageTop < modalHeight/2) {
       yPosition = 'Низ'
      } else {
       yPosition = 'Середина'
@@ -175,53 +164,37 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
      } else {
       overflowPageWidth = 'НЕ Помещается по ширине'
      }
-     console.log('============================================================')
-     console.log('xPosition ' + xPosition)
-     console.log('yPosition ' + yPosition)
-     console.log('overflow ' + overflow)
-     console.log('overflowPageWidth ' + overflowPageWidth)
-     console.log('============================================================')
+
 
 
      if (xPosition == 'Право' && yPosition == 'Середина' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'Помещается по ширине') { 
-      console.log('4 право');
       hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
       hintArea.style.justifyContent = "center"; 
       } else if (xPosition == 'Лево' && yPosition == 'Середина' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
-        console.log('5 лево');
         hintWindow.style.right = helpWindowInPageWidth + 20 + "px";     
         } else if (xPosition == 'Лево' && yPosition == 'Середина' && overflow == 'НЕТ места СПРАВА' && overflowPageWidth == 'Помещается по ширине') { 
-          console.log('5 лево');
           hintWindow.style.right = helpWindowInPageWidth + 20 + "px";       
           } else if (xPosition == 'Право' && yPosition == 'Середина' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
-            console.log('4 право');
             hintWindow.style.left = helpWindowInPageWidth + 20 + "px";    
             } else if (xPosition == 'Право' && yPosition == 'Низ' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'Помещается по ширине') { 
-              console.log('1 право верхний угол');
               hintWindow.style.top = helpWindowInPageHeight + 20 + "px";
               hintWindow.style.left = "20px";   
               } else if (xPosition == 'Лево' && yPosition == 'Низ' && overflow == 'НЕТ места СПРАВА' && overflowPageWidth == 'Помещается по ширине') { 
-                console.log('2 лево верхний угол');
                 hintWindow.style.top = helpWindowInPageHeight + 20 + "px";
                 hintWindow.style.right = "20px";
                 } else if (xPosition == 'Лево' && yPosition == 'Низ' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
-                  console.log('3 низ');
                   hintWindow.style.top = helpWindowInPageHeight + 20 + "px";
                   hintArea.style.justifyContent = "center"
                   } else if (xPosition == 'Право' && yPosition == 'Верх' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'Помещается по ширине') { 
-                    console.log('7 право нижний угол');
                     hintWindow.style.left = "20px";
                     hintWindow.style.bottom = helpWindowInPageHeight + 20 + "px";
                     } else if (xPosition == 'Лево' && yPosition == 'Верх' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
-                      console.log('8 вверх');
                       hintWindow.style.bottom = helpWindowInPageWidth + 20 + "px";
                       hintArea.style.justifyContent = "center";
                       } else if (xPosition == 'Право' && yPosition == 'Верх' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') { 
-                        console.log('8 вверх');
                         hintWindow.style.bottom = helpWindowInPageHeight + 20 + "px";
                         hintArea.style.justifyContent = "center"
                         } else if (xPosition == 'Лево' && yPosition == 'Верх' && overflow == 'НЕТ места СПРАВА' && overflowPageWidth == 'Помещается по ширине') { 
-                          console.log('88 вверх');
                           hintWindow.style.right = "20px";
                           hintWindow.style.bottom = helpWindowInPageHeight + 20 + "px";
                           } else if(xPosition == 'Право' && yPosition == 'Низ' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') {
@@ -233,90 +206,13 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
                             
                             hintArea.style.justifyContent = "center"; 
                           }
-  
-
-/*
-    if (coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageTop < modalHeight/2) { 
-      console.log('1 право верхний угол');
-      hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
-      hintWindow.style.top = "20px";
-      hintWindow.style.bottom = "auto";
-
-   
-      } else if (coordNewhelpElementInPageRight < modalWidth/2 && coordNewhelpElementInPageTop < modalHeight/2) { 
-        console.log('2 лево верхний угол');
-        hintWindow.style.right = helpWindowInPageWidth + 20 + "px";
-        hintWindow.style.top = "20px";
-        hintWindow.style.bottom = "auto";
-      }
-
-      else if (coordNewhelpElementInPageTop < modalHeight/2 && coordNewhelpElementInPageLeft > modalWidth/2 && coordNewhelpElementInPageRight > modalWidth/2) { 
-        console.log('3 низ');
-        hintWindow.style.top = helpWindowInPageHeight + 20 + "px";
-        hintWindow.style.bottom = "auto";
-        hintArea.style.justifyContent = "center"
-      }
-
-      else if (coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageRight > coordNewhelpElementInPageLeft && modalWidth + helpWindowInPageWidth + 20 > pageWidth) { 
-        console.log('4 право');
-        console.log(coordNewhelpElementInPageTop > modalHeight);  
-        hintWindow.style.bottom = "auto";
-        hintWindow.style.top = "auto";
-        hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
-        hintWindow.style.bottom = "auto";
-        hintArea.style.justifyContent = "center";  
-
-      } else if (coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageLeft > modalWidth) { 
-        console.log('5 лево');
-        hintWindow.style.bottom = "auto";
-        hintWindow.style.top = "auto";
-        hintWindow.style.right = helpWindowInPageWidth + 20 + "px";
-        hintWindow.style.bottom = "auto";
-        hintArea.style.justifyContent = "center";
-
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageRight < modalWidth/2) { 
-        console.log('6 лево нижний угол');
-        hintWindow.style.bottom = "20px";
-        hintWindow.style.top = "auto";
-        hintWindow.style.right = helpWindowInPageWidth + 20 + "px";
-
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageLeft < modalWidth/2 ) { 
-        console.log('7 право нижний угол');
-        hintWindow.style.top = "auto";
-        hintWindow.style.right = "auto";
-        hintWindow.style.bottom = "20px";
-        hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
-
-      } else if (coordNewhelpElementInPageBottom < modalHeight/2 && coordNewhelpElementInPageLeft > modalWidth && coordNewhelpElementInPageRight > modalWidth && coordNewhelpElementInPageTop > modalHeight) { /* расстояние от элемента до конца документа снизу
-        console.log('8 вверх');
-        hintWindow.style.top = "auto";
-        hintWindow.style.right = "auto";
-        hintWindow.style.bottom = helpWindowInPageWidth + 20 + "px";
-        hintArea.style.justifyContent = "center";
-
-      } *//*else if  (coordNewhelpElementInPageBottom > modalHeight && coordNewhelpElementInPageTop > modalHeight && coordNewhelpElementInPageLeft < modalWidth/2 && coordNewhelpElementInPageRight > modalWidth) { 
-        console.log('9');
-        hintWindow.style.top = "auto";
-        hintWindow.style.right = "auto";
-        hintWindow.style.bottom = "auto";
-        hintWindow.style.left = helpWindowInPageWidth + 20 + "px";
-        hintArea.style.justifyContent = "center";
-      }
-      else {
-        console.log('не нашлось позиционирования')
-      }*/
-    
-
-
   },
+
+
   insertHint: function(a, b) { /* Вставляем подсказку */
     /* Вставляем подсказку */
     let modalContant = document.querySelector('.modalContant'); /* находим div обертку элемента, куда нужно вставить подсказку */
-    console.log('hint.newhelpElement(a.id).getBoundingClientRect()');
-    console.log(a);
-    console.log(a.id);
     let coordNewhelpElementInPage = hint.newhelpElement(a).getBoundingClientRect();/* вычисляем расположение элемента про который нужно вывести подсказку  */
-    console.log(coordNewhelpElementInPage);
     let pageWidth = document.documentElement.scrollWidth; /* находим ширину страницы */
     let pageHeight = document.documentElement.scrollHeight; /* находим высоту страницы */
 
@@ -337,20 +233,14 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
 
  },
  resize: function(){
- 
 
   if(hint.resizeTimeout == false){
-    
     hint.resizeTimeout = true;
     setTimeout(function(){hint.resizeTimeout = false;}, 500);
     hint.choiceOfLocation(hint.modalTextWindow[hint.countHelp]);
-    
-
-  } else{
-    
-  }
-
+  } 
  },
+
  resizeTimeout: false,
  startHint: true,
 }
@@ -365,12 +255,9 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
     hint.visibilityPage()
     hint.createHint(a); /* создаем подсказку */
     let modalTextWindowHint = hint.modalTextWindow[a];
-    console.log('modalTextWindowHint ' + modalTextWindowHint);
-    console.log(modalTextWindowHint);
     hint.preparingPlacesForHints(modalTextWindowHint); /* готовим место для подсказки */
     hint.insertHint(modalTextWindowHint, a); /* вставляем подсказку */
-  } 
-  
+  }   
 }
 
 
@@ -391,7 +278,7 @@ function closeWindowHelp() {  /* При нажатии на закладку, у
 let stringAid = document.getElementById('aid'); /* находим по id элемент "Написать в поддержку" */
 let formAid = document.getElementById('connection')  /* находим по id контейнер с формой для заполнения */
 
-function openAid() {                    /*   при клике на элемент вызываем функцию, где у нас появляется форма */
+function openAid() {    /*  при клике на элемент вызываем функцию, где у нас появляется форма */
   formAid.style.display = 'block'
 }
 
@@ -399,7 +286,7 @@ stringAid.addEventListener('click', openAid);
 
 let exitForm = document.getElementById('btnExit'); /* находим по id кнопку закрытия окна формы */
 
-function exitAid() {                    /* при клике на элемент вызываем функцию, где закрывается форма */
+function exitAid() {      /* при клике на элемент вызываем функцию, где закрывается форма */
   formAid.style.display = "none";
 }
 
