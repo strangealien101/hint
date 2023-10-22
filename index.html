@@ -4,15 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/teacher.css">
+    <link rel="stylesheet" href="css/teacher__help.css">
 </head>
 
-
-
-
-
-
 <body>
+
+    <!-- === Фрагмент для вставки === -->
+    <div id="connection" class="form-bigBlock">
+        <div class="form-container">
+            <div class="form-title">
+                <h2 class="form-bigTitle">Форма для связи с&nbsp;поддержкой</h2>
+                <button id="btnExit" class="form-btnExit">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="close 1">
+                        <path id="Vector" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#C8C8C8"/>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+            <div class="form-data">
+                <p class="form-smallTitle">Ваши контактные данные</p>
+                <div class="form-field">
+                    <input type="name" placeholder="Имя" class="form-field__data" required>
+                    <input type="name" placeholder="Фамилия" class="form-field__data" required>
+                    <input type="email" placeholder="Email" class="form-field__data" required>
+                    <input type="tel" placeholder="Телефон" class="form-field__data" required>
+                </div>
+                <div class="form-data">
+                    <p class="form-smallTitle">Ваш вопрос</p>
+                <textarea aria-label="Введите сообщение" placeholder="Напишите свой вопрос" class="form-field__text"></textarea>
+                </div>
+                <div class="form-blockBtn">
+                    <button class="form-blockBtn__send">Отправить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-section">
+        <div id="program" class="block-programs">
+            <div class="book-question"> 
+                <div id="bookMark" class="bookmark"></div>
+            </div>
+            <div id="reference" class="container-reference">
+                <div class="reference-title">Справка по&nbsp;работе с&nbsp;системой</div>
+                <div class="reference-infoBlock">
+                    <div>
+                        <h2 class="reference-titleDown" >Программы производителя</h2>
+                        <div class="reference-textBlock">
+                            Место для контента
+                        </div>
+
+                        <div class="reference-btnBlock">
+                            <button id="startHlp" class="reference-btn">Запустить обучение</button>  
+                        </div>
+                    </div>
+                    <a id="aid" class="reference-downText">Написать в&nbsp;поддержку</a>
+                </div>    
+            </div>
+        </div>
+    </div>
     <template id="templateHelpWindow">
         <div class="modal-window" id="modalWindow">
             <div class="modal-contant">
@@ -26,15 +77,15 @@
                     Кнопка &laquo;Добавить программу&raquo; создает новую программу.
                 </div>
                 <div class="modal-btn">
-                    <button id="exit" class="modal-btn__exit">Закрыть</button>
+                    <button id="exitTH" class="modal-btn__exit">Закрыть</button>
                     <div class="modal-twoBtn">
-                        <button id="previous" class="modal-twoBtn__next backBtn">
+                        <button id="previousTH" class="modal-twoBtn__next backBtn">
                             <svg class="modal-twoBtn__icon" width="17" height="8" viewBox="0 0 17 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.646446 3.64645C0.451183 3.84171 0.451183 4.15829 0.646446 4.35355L3.82843 7.53554C4.02369 7.7308 4.34027 7.7308 4.53553 7.53553C4.7308 7.34027 4.7308 7.02369 4.53553 6.82843L1.70711 4L4.53553 1.17157C4.7308 0.976312 4.7308 0.659729 4.53553 0.464467C4.34027 0.269205 4.02369 0.269205 3.82843 0.464467L0.646446 3.64645ZM17 3.5L1 3.5L1 4.5L17 4.5L17 3.5Z" fill="white"/>
                             </svg>
                             Назад
                         </button>
-                        <button id="next" class="modal-twoBtn__next">
+                        <button id="nextTH" class="modal-twoBtn__next">
                             Далее
                             <svg class="modal-twoBtn__iconNext" width="17" height="8" viewBox="0 0 17 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16.3536 4.35355C16.5488 4.15829 16.5488 3.84171 16.3536 3.64645L13.1716 0.464466C12.9763 0.269204 12.6597 0.269204 12.4645 0.464466C12.2692 0.659728 12.2692 0.976311 12.4645 1.17157L15.2929 4L12.4645 6.82843C12.2692 7.02369 12.2692 7.34027 12.4645 7.53553C12.6597 7.7308 12.9763 7.7308 13.1716 7.53553L16.3536 4.35355ZM0 4.5H16V3.5H0V4.5Z" fill="white"/>
@@ -45,12 +96,11 @@
             </div>
         </div>
     </template> 
-    <div id="bckgModal" class="modal">
-
-    <!--Сюда вставляем вёрстку-->
-    
-    </div>
+    <div id="bckgModalTH" class="modal"></div>
+    <div id="bckgHelp" class="modal"></div>
+<!-- === Фрагмент для вставки === -->
 <script src="js/teacher.js"></script>
+
 </body>
 </html>
 

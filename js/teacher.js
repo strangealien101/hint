@@ -224,6 +224,14 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
                           console.log('88 вверх');
                           hintWindow.style.right = "20px";
                           hintWindow.style.bottom = helpWindowInPageHeight + 20 + "px";
+                          } else if(xPosition == 'Право' && yPosition == 'Низ' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') {
+                            hintWindow.style.top = helpWindowInPageHeight + 20 + "px"; 
+                          } else if(xPosition == 'Право' && yPosition == 'Низ' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'НЕ Помещается по ширине'){
+                            
+                            hintArea.style.justifyContent = "center"; 
+                          } else if(xPosition == 'Право' && yPosition == 'Середина' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'НЕ Помещается по ширине'){
+                            
+                            hintArea.style.justifyContent = "center"; 
                           }
   
 
@@ -344,6 +352,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
 
  },
  resizeTimeout: false,
+ startHint: true,
 }
 
 
@@ -407,8 +416,25 @@ document.getElementById('startHlp').onclick = function() {
 /* 
 ! =================== НАЧАЛО ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
-startTeacher(hint.countHelp); 
-window.addEventListener('resize', hint.resize);
+
+
+
+
+
+let hintInPage = this.document.querySelectorAll('[data-id]');
+console.log(hintInPage.length);
+if(hintInPage.length < 1){
+  
+  hint.startHint = false;
+  
+} else{
+  startTeacher(hint.countHelp); 
+  window.addEventListener('resize', hint.resize);
+  console.log('НУЛЬ');
+  hint.startHint = true;
+}
+
+
 
 
 
