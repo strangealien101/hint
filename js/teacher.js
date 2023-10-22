@@ -32,7 +32,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
   },
 
 
-  hintСard: 0, /* Сохраняем подсказку*/
+  hintСard: 0, /** Сохраняем подсказку  **/
   helpData: document.querySelectorAll('[data-id]'),
   createHint: function(a) {/* Формируем подсказку*/
     let template = document.querySelector('#templateHelpWindow') /* находим шаблон подсказки */ 
@@ -197,6 +197,14 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
                         } else if (xPosition == 'Лево' && yPosition == 'Верх' && overflow == 'НЕТ места СПРАВА' && overflowPageWidth == 'Помещается по ширине') { 
                           hintWindow.style.right = "20px";
                           hintWindow.style.bottom = helpWindowInPageHeight + 20 + "px";
+                          } else if(xPosition == 'Право' && yPosition == 'Низ' && overflow == 'Места хватает' && overflowPageWidth == 'Помещается по ширине') {
+                            hintWindow.style.top = helpWindowInPageHeight + 20 + "px"; 
+                          } else if(xPosition == 'Право' && yPosition == 'Низ' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'НЕ Помещается по ширине'){
+                            
+                            hintArea.style.justifyContent = "center"; 
+                          } else if(xPosition == 'Право' && yPosition == 'Середина' && overflow == 'НЕТ места СЛЕВА' && overflowPageWidth == 'НЕ Помещается по ширине'){
+                            
+                            hintArea.style.justifyContent = "center"; 
                           }
   },
 
@@ -234,6 +242,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
  },
 
  resizeTimeout: false,
+ startHint: true,
 }
 
 
@@ -294,8 +303,25 @@ document.getElementById('startHlp').onclick = function() {
 /* 
 ! =================== НАЧАЛО ПОТОКА ВЫПОЛНЕНИЯ СКРИПТА =================== 
 */
-startTeacher(hint.countHelp); 
-window.addEventListener('resize', hint.resize);
+
+
+
+
+
+let hintInPage = this.document.querySelectorAll('[data-id]');
+console.log(hintInPage.length);
+if(hintInPage.length < 1){
+  
+  hint.startHint = false;
+  
+} else{
+  startTeacher(hint.countHelp); 
+  window.addEventListener('resize', hint.resize);
+  console.log('НУЛЬ');
+  hint.startHint = true;
+}
+
+
 
 
 
@@ -306,12 +332,5 @@ window.addEventListener('resize', hint.resize);
 }
 )
 
-/** 
- * ! Задание
- * ресайз подсказки ДА
- * id у подсказок ДА
- * метод заполнения массива
- * заменить удаление элемента на скрытие его через видимость или использовать наложение css ДА
- * Переполнение в плашке с подсказок ДА
- */
+
 
