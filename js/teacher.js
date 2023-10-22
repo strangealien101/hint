@@ -32,7 +32,7 @@ window.addEventListener('load', function open(){   /* Запуск обучен�
   },
 
 
-  hintСard: 0, /* Сохраняем подсказку*/
+  hintСard: 0, /** Сохраняем подсказку  **/
   helpData: document.querySelectorAll('[data-id]'),
   createHint: function(a) {/* Формируем подсказку*/
     let template = document.querySelector('#templateHelpWindow') /* находим шаблон подсказки */ 
