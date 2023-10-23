@@ -39,6 +39,9 @@ body {
     font-style: normal;
 }
 
+
+
+
 :root {
     --blackWilliam: rgb(0, 0, 0);
     --grayDolores: rgba(40, 40, 40, 1);
@@ -59,6 +62,200 @@ body {
     --whitePeter: #FCFCFC;
 }
 
+/* Модальное окно */
+
+.modal {
+    width: 100%;
+    height: 100%;
+    background-color: var(--blackWilliam);
+    position: fixed;
+    z-index: 100;
+    opacity: 0.6;
+    display: none;
+}
+
+#bckgModal{
+    z-index: 100;
+
+}
+
+.modalBGTH {
+    display: block;
+    
+}
+
+.modal-window {
+    position: absolute; 
+    padding: 25px;
+    width: 100%;
+    max-width: 310px;
+    background-color: var(--grayDolores);
+    border-radius: 5px;
+    z-index: 2000;
+    box-shadow: 0px 11px 15px 0px rgba(0, 0, 0, 0.2), 0px 9px 46px 0px rgba(0, 0, 0, 0.12), 0px 24px 38px 0px rgba(0, 0, 0, 0.14); 
+}
+
+
+.modal-contant {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid var(--grayTeodor);
+}
+
+.modal-header__text {
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--whiteMaeve);
+    font-family: "Roboto";
+}
+
+.modal-text {
+    margin-bottom: 15px;
+    
+    font-size: 14px;
+    line-height: 15px;
+    color: var(--grayBernard);
+    font-family: "Roboto"; 
+}
+
+.modal-icon {
+    margin-right: 10px;
+}
+
+.modal-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-twoBtn {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.modal-btn__exit {
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--whiteRobert);
+    font-family: "Roboto"; 
+    cursor: pointer;
+}
+
+.modal-btn__exit:hover {
+    color: var(--whiteCharlotte);
+}
+
+.modal-btn__exit:active {
+    color: var(--whiteRobert);
+}
+
+.modal-twoBtn__next {
+    padding: 8px;
+    
+    border: 1px solid var(--grayTeodor);
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--grayBernard);
+    font-family: "Roboto"; 
+    cursor: pointer;
+}
+
+.modal-twoBtn__next:hover {
+    background-color: var(--grayHector);
+    border: 1px solid var(--grayArnold);
+    color: var(--whiteMaeve);
+}
+
+.modal-twoBtn__next:focus {
+    background-color: var(--grayArnold);
+    border: 1px solid var(--grayArnold);
+    color: var(--whiteMaeve);
+}
+
+.backBtn {
+    display: none;
+}
+
+.modal-twoBtn__icon {
+    margin-right: 10px;
+}
+
+.modal-twoBtn__iconNext {
+    margin-left: 10px;
+}
+
+.modal-twoBtn__icon path {
+    fill: var(--grayBernard);
+}
+
+.modal-twoBtn__iconNext path {
+    fill: var(--grayBernard);
+}
+
+.modal-twoBtn__next:hover {
+    color: var(--whiteMaeve); 
+} 
+
+.modal-twoBtn__next:hover > .modal-twoBtn__icon path {
+    fill: var(--whiteMaeve);
+}
+
+.modal-twoBtn__next:hover > .modal-twoBtn__iconNext path {
+    fill: var(--whiteMaeve);
+}
+
+.modal-btn__exit:hover {
+    color: var(--whiteMaeve);
+}
+
+.modal-twoBtn__next:active {
+    color: var(--whiteMaeve);
+}
+
+.hero-btn {
+    position: relative;
+}
+
+.modalContant {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* страничка с блоками */
+
+.window-list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 20px;
+}
+
+
+.window-list__block {
+    width: 320px;
+    height: 320px;
+
+    background-color: rgb(17, 166, 172);
+    font-size: 64px;
+}
 
 /* Справка */
 
@@ -353,3 +550,4 @@ body {
     cursor: pointer;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.20), 0px 3px 1px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
 }
+
